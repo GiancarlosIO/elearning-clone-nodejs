@@ -23,7 +23,7 @@ RUN npm run build
 
 EXPOSE 4000
 
-CMD ["NODE_ENV=production", "node", "dist/index.js"]
+CMD ["npm", "run", "start:prod"]
 
 USER node
 
