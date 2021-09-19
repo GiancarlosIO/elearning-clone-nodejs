@@ -19,6 +19,7 @@ RUN npm install
 # Copy the code into the container
 COPY . .
 
+RUN npm run clean
 RUN npm run build
 
 EXPOSE 4000
