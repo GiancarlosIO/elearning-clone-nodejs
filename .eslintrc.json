@@ -30,6 +30,7 @@
       {
         "argsIgnorePattern": "next"
       }
-    ]
+    ],
+    "import/prefer-default-export": 0
   }
 }
