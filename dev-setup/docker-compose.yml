@@ -5,7 +5,7 @@ services:
     image: postgres:latest
     restart: always
     env_file:
-      - ../app.env
+      - ../.env
     ports:
       - '5433:5432'
     volumes:
@@ -18,7 +18,7 @@ services:
     # restart: on-failure
     volumes:
       - ..:/src/
-    env_file: ../app.env
+    env_file: ../.env
     depends_on:
       - database
     networks:
@@ -28,7 +28,7 @@ services:
   pgadmin:
     image: dpage/pgadmin4
     container_name: elearning-clone-pgadmin_container_dev
-    env_file: ../app.env
+    env_file: ../.env
     depends_on:
       - database
     ports:
