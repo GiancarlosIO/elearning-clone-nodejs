@@ -15,12 +15,11 @@ WORKDIR /usr/src/app
 # A wildcard is used to ensure both package.json and package-lock.json are copied
 COPY package*.json ./
 
-RUN npm ci
-
-RUN npm run build
-
+RUN npm install
 # Copy the code into the container
 COPY . .
+
+RUN npm run build
 
 EXPOSE 4000
 
