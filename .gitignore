@@ -3,3 +3,4 @@ dist
 keys
 app.env
 .env
+.prod.env
