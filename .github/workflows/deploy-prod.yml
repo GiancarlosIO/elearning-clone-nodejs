@@ -30,5 +30,6 @@ jobs:
           docker build . -t ${{ secrets.APP_DOCKER_NAME }}:$git_hash
           docker images
           docker image tag ${{ secrets.APP_DOCKER_NAME }}:$git_hash ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.APP_DOCKER_NAME }}:$git_hash
+          docker image tag ${{ secrets.APP_DOCKER_NAME }}:$git_hash ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.APP_DOCKER_NAME }}:latest
           docker image push ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.APP_DOCKER_NAME }}:$git_hash
           docker image push ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.APP_DOCKER_NAME }}:latest
