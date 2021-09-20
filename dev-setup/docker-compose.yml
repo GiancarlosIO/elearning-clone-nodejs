@@ -11,28 +11,20 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
   server:
-    container_name: elearing-clone-container_dev
+    container_name: elearning-clone-container_dev
     build:
       context: ../
       dockerfile: dev-setup/Dockerfile
     # restart: on-failure
     volumes:
-      - ..:/src/
+      - ../:/usr/src/app/
+      - /usr/src/app/node_modules # Remove this if you have pure JS dependencies
     env_file: ../.env
     depends_on:
       - database
     networks:
       - default
     ports:
-      - 4000:4000
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: elearning-clone-pgadmin_container_dev
-    env_file: ../.env
-    depends_on:
-      - database
-    ports:
-      - "5051:80"
-    restart: unless-stopped
+      - '0.0.0.0:4000:4000'
 volumes:
   pgdata:

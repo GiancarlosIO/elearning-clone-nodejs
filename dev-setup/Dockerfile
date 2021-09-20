@@ -9,6 +9,7 @@ RUN chmod +x /tini
 ENTRYPOINT ["/tini", "--"]
 
 # Move to working directory /build
+RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 # Install app dependencies
