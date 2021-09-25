@@ -7,6 +7,15 @@
     "esModuleInterop": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": [
+        "./*"
+      ],
+      "@resources/*": [
+        "./resources/*"
+      ]
+    }
   },
   "include": [
     "src/**/*.ts"
