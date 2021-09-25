@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon -L",
-    "build": "tsc",
+    "build": "tsc && tscpaths -p tsconfig.json -s ./src -o ./dist",
     "clean": "rimraf ./dist",
     "start": "cross-env NODE_ENV=production npm run clean && npm run build && node dist/index.js",
     "start:prod": "cross-env NODE_ENV=production node dist/index.js",
@@ -22,6 +22,8 @@
     "nodemon": "^2.0.12",
     "pg": "^8.7.1",
     "reflect-metadata": "^0.1.13",
+    "tsconfig-paths": "^3.11.0",
+    "tscpaths": "0.0.9",
     "typeorm": "^0.2.37"
   },
   "devDependencies": {
