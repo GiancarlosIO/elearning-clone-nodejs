@@ -6,3 +6,4 @@ keys
 build/
 tmp/
 temp
+dist
