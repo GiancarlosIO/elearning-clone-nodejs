@@ -14,6 +14,12 @@
       ],
       "@resources/*": [
         "./resources/*"
+      ],
+      "@middlewares/*": [
+        "./middlewares/*"
+      ],
+      "@utils/*": [
+        "./utils/*"
       ]
     }
   },
