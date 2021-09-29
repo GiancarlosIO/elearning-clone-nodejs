@@ -1,10 +1,11 @@
 /* eslint-disable no-console */
 import 'reflect-metadata';
 import express from 'express';
+import morgan from 'morgan';
 import dotenv from 'dotenv';
 
 import { createConnection } from 'typeorm';
-import userRouter, { User } from '@resources/user';
+import { userRouter, User, bannersRouter } from '@resources';
 
 import { errorLogger, errorResponder } from '@middlewares/errors';
 
@@ -25,6 +26,7 @@ createConnection({
 })
   .then(async () => {
     const app = express();
+    app.use(morgan('combined'));
     app.use(express.json());
 
     app.get('/', (req, res) => {
@@ -32,6 +34,7 @@ createConnection({
     });
 
     app.use('/api/v1/', userRouter);
+    app.use('/api/v1/', bannersRouter);
 
     app.use(errorLogger);
     app.use(errorResponder);

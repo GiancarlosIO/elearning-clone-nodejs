@@ -1,4 +1,4 @@
-import { Router, Request } from 'express';
+import { Router } from 'express';
 
 import userController from './user.controller';
 import { verifyTokenAndAttachUserToRequest } from './middlewares/authentication';
@@ -6,11 +6,11 @@ import { verifyTokenAndAttachUserToRequest } from './middlewares/authentication'
 const userRouter = Router();
 
 userRouter.get(
-  '/me/',
+  '/auth/me/',
   verifyTokenAndAttachUserToRequest,
   userController.getCurrentUser
 );
-userRouter.post('/create-user/', userController.createUser);
-userRouter.post('/login/', userController.login);
+userRouter.post('/auth/create-user/', userController.createUser);
+userRouter.post('/auth/login/', userController.login);
 
 export default userRouter;
