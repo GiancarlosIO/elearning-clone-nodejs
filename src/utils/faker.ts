@@ -85,8 +85,8 @@ export const generateFakeCourse = () => ({
   description: faker.lorem.paragraphs(10),
   duration: faker.datatype.number(9999),
   prices: {
-    price: faker.commerce.price(9, 20),
-    realPrice: faker.commerce.price(60, 100),
+    price: faker.finance.amount(9, 60),
+    realPrice: faker.finance.amount(100, 200),
     discount: 20,
     currencySymbol: faker.finance.currencySymbol(),
   },
@@ -95,4 +95,20 @@ export const generateFakeCourse = () => ({
 });
 
 export const generateFakeCourses = (options = { length: 200 }) =>
-  Array.from({ length: 200 }).map(generateFakeCourse);
+  Array.from({ length: options.length }).map(generateFakeCourse);
+
+// ========================================================================
+
+export const generateShoppingCartFake = () => ({
+  id: faker.datatype.uuid(),
+  prices: {
+    totalPrice: faker.finance.amount(700, 800),
+    realTotalPrice: faker.finance.amount(1200, 2000),
+    discount: faker.datatype.number({
+      max: 40,
+      min: 20,
+    }),
+    currencySymbol: faker.finance.currencySymbol(),
+  },
+  detail: generateFakeCourses({ length: 10 }),
+});
