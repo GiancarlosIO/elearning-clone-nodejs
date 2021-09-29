@@ -1,6 +1,7 @@
 import faker from 'faker';
 
 // ========================================================================
+
 // IsActive bool `json:"isActive"`
 // // ex: 2022-12-30T00:00:00-07:00
 // ExpiresAt       time.Time `json:"expiresAt"`
@@ -10,8 +11,8 @@ import faker from 'faker';
 // Title           string    `json:"title"`
 // Subtitle        string    `json:"subtitle"`
 // BackgroundImage string    `json:"backgroundImage"`
-
 export const generateFakeBanner = () => ({
+  id: faker.datatype.uuid(),
   isActive: faker.datatype.boolean(),
   expiresAt: faker.date.future(),
   position: faker.datatype.number(20),
@@ -23,6 +24,26 @@ export const generateFakeBanner = () => ({
 });
 
 // ========================================================================
+
+// IsActive bool   `json:"isActive"`
+// 	Name     string `json:"name" gorm:"unique"`
+// 	Order    int    `json:"order"`
+// 	Slug     string `json:"slug"`
+// 	Url      string `json:"url"
+//   CategoryID uint      `json:"categoryId"`
+// 	Courses    []*Course `gorm:"many2many:course_sub_categories"`
+export const generateFakeSubCategory = (options = { coursesLength: 200 }) => ({
+  id: faker.datatype.uuid(),
+  isActive: faker.datatype.boolean(),
+  name: faker.name.jobArea(),
+  order: faker.datatype.number(20),
+  slug: faker.lorem.slug(),
+  url: faker.internet.url(),
+  categoryId: faker.datatype.number(20),
+});
+
+// ========================================================================
+
 // Name     string `json:"name"`
 // 	Slug     string `json:"slug"`
 // 	Url      string `json:"url"`
@@ -30,13 +51,14 @@ export const generateFakeBanner = () => ({
 // 	IsActive bool   `json:"isActive"`
 //   SubCategories []SubCategory `json:"subCategories"`
 // 	Courses       []*Course     `gorm:"many2many:course_categories"`
-
-export const generateFakeCategory = () => ({
+export const generateFakeCategory = (options = { coursesLength: 200 }) => ({
+  id: faker.datatype.uuid(),
   name: faker.name.jobArea(),
   url: faker.internet.url(),
   slug: faker.lorem.slug(),
   order: faker.datatype.number(200),
   isActive: faker.datatype.boolean(),
+  // subCategories: Array.from({ length: 10 }).map(generateFakeSubCategory),
 });
 
 // ========================================================================
@@ -53,7 +75,6 @@ export const generateFakeCategory = () => ({
 // Sections      []CourseSection `json:"sections"`
 // 	Categories    []*Category     `json:"categories" gorm:"many2many:course_categories"`
 // 	SubCategories []*SubCategory  `json:"subCategories" gorm:"many2many:course_sub_categories"
-
 export const generateFakeCourse = () => ({
   id: faker.datatype.uuid(),
   isActive: faker.datatype.boolean(),
@@ -70,23 +91,8 @@ export const generateFakeCourse = () => ({
     currencySymbol: faker.finance.currencySymbol(),
   },
   categories: Array.from({ length: 2 }).map(generateFakeCategory),
+  subCategories: Array.from({ length: 2 }).map(generateFakeSubCategory),
 });
 
-// ========================================================================
-
-// IsActive bool   `json:"isActive"`
-// 	Name     string `json:"name" gorm:"unique"`
-// 	Order    int    `json:"order"`
-// 	Slug     string `json:"slug"`
-// 	Url      string `json:"url"
-
-//   CategoryID uint      `json:"categoryId"`
-// 	Courses    []*Course `gorm:"many2many:course_sub_categories"`
-export const createFakeSubCategory = () => ({
-  isActive: faker.datatype.boolean(),
-  name: faker.name.jobArea(),
-  order: faker.datatype.number(20),
-  slug: faker.lorem.slug(),
-  url: faker.internet.url(),
-  categoryId: faker.datatype.number(20),
-});
+export const generateFakeCourses = (options = { length: 200 }) =>
+  Array.from({ length: 200 }).map(generateFakeCourse);

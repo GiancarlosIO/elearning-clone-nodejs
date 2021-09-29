@@ -11,6 +11,7 @@ import {
   bannersRouter,
   coursesRouter,
   categoriesRouter,
+  subCategoriesRouter,
 } from '@resources';
 
 import { errorLogger, errorResponder } from '@middlewares/errors';
@@ -43,6 +44,7 @@ createConnection({
     app.use('/api/v1/', bannersRouter);
     app.use('/api/v1/', coursesRouter);
     app.use('/api/v1/', categoriesRouter);
+    app.use('/api/v1/', subCategoriesRouter);
 
     app.use(errorLogger);
     app.use(errorResponder);
