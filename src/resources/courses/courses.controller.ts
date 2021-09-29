@@ -1,5 +1,5 @@
+import { generateFakeCourse } from '@utils/faker';
 import { TController } from '../types';
-import { generateFakeCourse } from './utils';
 
 const coursesController: TController = {
   async getAll(req, res) {

@@ -1,4 +1,4 @@
-import { generateFakeBanner } from './utils';
+import { generateFakeBanner } from '@utils/faker';
 import { TController } from '../types';
 
 const bannersController: TController = {
