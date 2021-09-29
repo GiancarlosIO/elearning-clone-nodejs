@@ -5,7 +5,7 @@ import morgan from 'morgan';
 import dotenv from 'dotenv';
 
 import { createConnection } from 'typeorm';
-import { userRouter, User, bannersRouter } from '@resources';
+import { userRouter, User, bannersRouter, coursesRouter } from '@resources';
 
 import { errorLogger, errorResponder } from '@middlewares/errors';
 
@@ -35,6 +35,7 @@ createConnection({
 
     app.use('/api/v1/', userRouter);
     app.use('/api/v1/', bannersRouter);
+    app.use('/api/v1/', coursesRouter);
 
     app.use(errorLogger);
     app.use(errorResponder);

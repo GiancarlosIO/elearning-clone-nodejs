@@ -1,8 +1,7 @@
-import faker from 'faker';
-import { RequestHandler } from 'express';
+import { generateFakeBanner } from './utils';
+import { TController } from '../types';
 
-type TBannersController = Record<string, RequestHandler>;
-const bannersController = {
+const bannersController: TController = {
   async getAll(req, res) {
     // IsActive bool `json:"isActive"`
     // // ex: 2022-12-30T00:00:00-07:00
@@ -13,16 +12,7 @@ const bannersController = {
     // Title           string    `json:"title"`
     // Subtitle        string    `json:"subtitle"`
     // BackgroundImage string    `json:"backgroundImage"`
-    const fakeBanners = Array.from({ length: 20 }).map((_, index) => ({
-      isActive: faker.datatype.boolean(),
-      expiresAt: faker.date.future(),
-      position: faker.datatype.number(20),
-      ctaUrl: faker.internet.url(),
-      ctaLabel: faker.lorem.words(2),
-      title: faker.name.title(),
-      subtitle: faker.lorem.paragraph(),
-      backgroundImage: faker.image.imageUrl(1920, 180),
-    }));
+    const fakeBanners = Array.from({ length: 20 }).map(generateFakeBanner);
 
     res.send(fakeBanners);
   },
