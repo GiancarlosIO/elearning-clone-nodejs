@@ -44,7 +44,7 @@ export const subCategoryModel = {
   },
 };
 
-export const courseModel = {
+const courseBaseModel = {
   type: 'object',
   properties: {
     id,
@@ -67,6 +67,21 @@ export const courseModel = {
         currencySymbol: createStrintModel('currency symbol'),
       },
     },
+    categories: {
+      type: 'array',
+      items: categoryModel,
+    },
+    subCategories: {
+      type: 'array',
+      items: subCategoryModel,
+    },
+  },
+};
+
+export const courseModel = {
+  ...courseBaseModel,
+  properties: {
+    ...courseBaseModel.properties,
     categories: {
       type: 'array',
       items: categoryModel,
@@ -133,5 +148,25 @@ export const bannerModel = {
     title: createStrintModel('main title of the banner'),
     subtitle: createStrintModel('sub title of the banner'),
     backgroundImage: createStrintModel('image url of the banners bg'),
+  },
+};
+
+export const shoppingCartModel = {
+  type: 'object',
+  properties: {
+    id,
+    prices: {
+      type: 'object',
+      properties: {
+        totalPrice: createNumber('total price of the cart (with discount)'),
+        realTotalPrice: createNumber('real total price (without discount)'),
+        discount: createNumber('percentage of discount'),
+        currencySymbol: createStrintModel('Currency of the cart', '$'),
+      },
+    },
+    detail: {
+      type: 'array',
+      items: courseBaseModel,
+    },
   },
 };

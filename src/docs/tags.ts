@@ -1,4 +1,11 @@
-import { coursesTag, bannersTag, authTag } from './constants';
+import {
+  coursesTag,
+  bannersTag,
+  authTag,
+  categoryTag,
+  subCategoryTag,
+  shoppingCartTag,
+} from './constants';
 
 const tags = {
   tags: [
@@ -10,6 +17,15 @@ const tags = {
     },
     {
       name: authTag,
+    },
+    {
+      name: categoryTag,
+    },
+    {
+      name: subCategoryTag,
+    },
+    {
+      name: shoppingCartTag,
     },
   ],
 };

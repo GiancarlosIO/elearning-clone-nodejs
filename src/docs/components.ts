@@ -7,6 +7,7 @@ import {
   coursesByCategoryIdModel,
   subCategoryModel,
   coursesBySubCategoryIdModel,
+  shoppingCartModel,
 } from './models';
 
 const components = {
@@ -36,6 +37,7 @@ const components = {
         items: subCategoryModel,
       },
       CoursesBySubCategoryId: coursesBySubCategoryIdModel,
+      ShoppingCart: shoppingCartModel,
     },
     securitySchemes: {
       ApiKeyAuth: {

@@ -75,27 +75,45 @@ export const generateFakeCategory = (options = { coursesLength: 200 }) => ({
 // Sections      []CourseSection `json:"sections"`
 // 	Categories    []*Category     `json:"categories" gorm:"many2many:course_categories"`
 // 	SubCategories []*SubCategory  `json:"subCategories" gorm:"many2many:course_sub_categories"
-export const generateFakeCourse = () => ({
-  id: faker.datatype.uuid(),
-  isActive: faker.datatype.boolean(),
-  coverImage: faker.image.imageUrl(480, 480),
-  title: faker.name.title(),
-  subTitle: faker.lorem.paragraph(),
-  trailer: 'https://www.youtube.com/watch?v=gvkqT_Uoahw',
-  description: faker.lorem.paragraphs(10),
-  duration: faker.datatype.number(9999),
-  prices: {
-    price: faker.finance.amount(9, 60),
-    realPrice: faker.finance.amount(100, 200),
-    discount: 20,
-    currencySymbol: faker.finance.currencySymbol(),
-  },
-  categories: Array.from({ length: 2 }).map(generateFakeCategory),
-  subCategories: Array.from({ length: 2 }).map(generateFakeSubCategory),
-});
+export const generateFakeCourse = (
+  excludeCategoriesAndSubCategories: boolean = false
+) => {
+  const course = {
+    id: faker.datatype.uuid(),
+    isActive: faker.datatype.boolean(),
+    coverImage: faker.image.imageUrl(480, 480),
+    title: faker.name.title(),
+    subTitle: faker.lorem.paragraph(),
+    trailer: 'https://www.youtube.com/watch?v=gvkqT_Uoahw',
+    description: faker.lorem.paragraphs(10),
+    duration: faker.datatype.number(9999),
+    prices: {
+      price: faker.finance.amount(9, 60),
+      realPrice: faker.finance.amount(100, 200),
+      discount: 20,
+      currencySymbol: faker.finance.currencySymbol(),
+    },
+  };
 
-export const generateFakeCourses = (options = { length: 200 }) =>
-  Array.from({ length: options.length }).map(generateFakeCourse);
+  if (!excludeCategoriesAndSubCategories) {
+    return {
+      ...course,
+      categories: Array.from({ length: 2 }).map(generateFakeCategory),
+      subCategories: Array.from({ length: 2 }).map(generateFakeSubCategory),
+    };
+  }
+  return course;
+};
+
+export const generateFakeCourses = (
+  options: { length?: number; excludeCategoriesAndSubCategories?: boolean } = {
+    length: 200,
+    excludeCategoriesAndSubCategories: false,
+  }
+) =>
+  Array.from({ length: options.length }).map(() =>
+    generateFakeCourse(options.excludeCategoriesAndSubCategories)
+  );
 
 // ========================================================================
 
@@ -110,5 +128,8 @@ export const generateShoppingCartFake = () => ({
     }),
     currencySymbol: faker.finance.currencySymbol(),
   },
-  detail: generateFakeCourses({ length: 10 }),
+  detail: generateFakeCourses({
+    length: 10,
+    excludeCategoriesAndSubCategories: true,
+  }),
 });

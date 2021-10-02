@@ -8,6 +8,7 @@ import auth from './auth';
 import banners from './banners';
 import categories from './categories';
 import subCategories from './subCategories';
+import shoppingCart from './shoppingCart';
 
 export default {
   ...basicInfo,
@@ -20,5 +21,6 @@ export default {
     ...banners.paths,
     ...categories.paths,
     ...subCategories.paths,
+    ...shoppingCart.paths,
   },
 };
