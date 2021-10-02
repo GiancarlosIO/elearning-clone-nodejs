@@ -7,14 +7,18 @@ import courses from './courses';
 import auth from './auth';
 import banners from './banners';
 import categories from './categories';
+import subCategories from './subCategories';
 
 export default {
   ...basicInfo,
   ...server,
   ...components,
   ...tags,
-  ...courses,
-  ...auth,
-  ...banners,
-  ...categories,
+  paths: {
+    ...courses.paths,
+    ...auth.paths,
+    ...banners.paths,
+    ...categories.paths,
+    ...subCategories.paths,
+  },
 };

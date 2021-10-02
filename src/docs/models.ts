@@ -44,7 +44,7 @@ export const subCategoryModel = {
   },
 };
 
-export const CourseModel = {
+export const courseModel = {
   type: 'object',
   properties: {
     id,
@@ -74,6 +74,28 @@ export const CourseModel = {
     subCategories: {
       type: 'array',
       items: subCategoryModel,
+    },
+  },
+};
+
+export const coursesByCategoryIdModel = {
+  type: 'object',
+  properties: {
+    ...categoryModel.properties,
+    courses: {
+      type: 'array',
+      items: courseModel,
+    },
+  },
+};
+
+export const coursesBySubCategoryIdModel = {
+  type: 'object',
+  properties: {
+    ...subCategoryModel.properties,
+    courses: {
+      type: 'array',
+      items: courseModel,
     },
   },
 };

@@ -1,19 +1,22 @@
 import {
-  CourseModel,
+  courseModel,
   id,
   userModel,
   bannerModel,
   categoryModel,
+  coursesByCategoryIdModel,
+  subCategoryModel,
+  coursesBySubCategoryIdModel,
 } from './models';
 
 const components = {
   components: {
     schemas: {
       id,
-      Course: CourseModel,
+      Course: courseModel,
       Courses: {
         type: 'array',
-        items: CourseModel,
+        items: courseModel,
       },
       User: userModel,
       Banner: bannerModel,
@@ -26,6 +29,13 @@ const components = {
         type: 'array',
         items: categoryModel,
       },
+      CoursesByCategoryId: coursesByCategoryIdModel,
+      SubCategory: subCategoryModel,
+      SubCategories: {
+        type: 'array',
+        items: subCategoryModel,
+      },
+      CoursesBySubCategoryId: coursesBySubCategoryIdModel,
     },
     securitySchemes: {
       ApiKeyAuth: {
