@@ -1,4 +1,7 @@
 import { generateFakeBanner } from '@utils/faker';
+import { StatusCodes } from 'http-status-codes';
+
+import { createResponse } from '@/utils/response';
 import { TController } from '../types';
 
 const bannersController: TController = {
@@ -14,7 +17,7 @@ const bannersController: TController = {
     // BackgroundImage string    `json:"backgroundImage"`
     const fakeBanners = Array.from({ length: 20 }).map(generateFakeBanner);
 
-    res.send(fakeBanners);
+    res.send(createResponse(fakeBanners, StatusCodes.OK));
   },
 };
 
