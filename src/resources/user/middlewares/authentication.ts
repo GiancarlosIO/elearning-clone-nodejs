@@ -19,7 +19,7 @@ export const verifyTokenAndAttachUserToRequest: RequestHandler = (
       new BaseError({
         name: 'Auth',
         statusCode: httpStatusCode.UNAUTHORIZED,
-        description: 'you must be logged to access to these resoureces',
+        description: 'you must be logged to access to these resources',
       })
     );
     return;
