@@ -4,6 +4,7 @@ import components from './components';
 import tags from './tags';
 
 import courses from './courses';
+import auth from './auth';
 
 export default {
   ...basicInfo,
@@ -11,4 +12,5 @@ export default {
   ...components,
   ...tags,
   ...courses,
+  ...auth,
 };

@@ -10,7 +10,7 @@ import { TUserCredentials } from './user.types';
 const userService = {
   async getCurrentUser(id: number) {
     const userRepository = getRepository(User);
-    const currentUser = await userRepository.find({ id });
+    const currentUser = await userRepository.findOne({ id });
 
     return currentUser;
   },

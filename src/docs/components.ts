@@ -1,4 +1,4 @@
-import { CourseModel, id } from './models';
+import { CourseModel, id, userModel } from './models';
 
 const components = {
   components: {
@@ -8,6 +8,14 @@ const components = {
       Courses: {
         type: 'array',
         items: CourseModel,
+      },
+      User: userModel,
+    },
+    securitySchemes: {
+      ApiKeyAuth: {
+        type: 'apiKey',
+        in: 'header',
+        name: 'x-access-token',
       },
     },
   },

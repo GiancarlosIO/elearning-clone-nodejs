@@ -87,3 +87,14 @@ export const createResponseModel = ($ref: string) => ({
     },
   },
 });
+
+export const userModel = {
+  type: 'object',
+  properties: {
+    id,
+    username: createStrintModel('username of the user'),
+    email: createStrintModel('email', 'test@gmail.com'),
+    firstName: createStrintModel('name of the current user'),
+    lastName: createStrintModel('last name of the user'),
+  },
+};
