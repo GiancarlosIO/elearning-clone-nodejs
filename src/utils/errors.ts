@@ -9,18 +9,24 @@ type TErrorPayload = {
 };
 
 export class BaseError extends Error {
-  description: string;
+  status: number;
 
-  statusCode: number;
+  data?: string;
 
-  name: string;
+  error: {
+    description: string;
+    name: string;
+  };
 
   constructor(payload: TErrorPayload) {
     super(payload.description);
     Object.setPrototypeOf(this, new.target.prototype);
-    this.name = payload.name;
-    this.description = payload.description;
-    this.statusCode = payload.statusCode;
+    this.error = {
+      description: payload.description,
+      name: payload.name,
+    };
+    this.data = null;
+    this.status = payload.statusCode;
   }
 }
 

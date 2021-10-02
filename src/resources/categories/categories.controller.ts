@@ -1,20 +1,22 @@
 import { generateFakeCategory, generateFakeCourses } from '@utils/faker';
+import { StatusCodes } from 'http-status-codes';
 import { TController } from '../types';
+import { createResponse } from '@/utils/response';
 
 const categoriesController: TController = {
   async getAll(req, res) {
     const fakeCategories = Array.from({ length: 30 }).map(generateFakeCategory);
-    res.send(fakeCategories);
+    res.send(createResponse(fakeCategories, StatusCodes.OK));
   },
   async getById(req, res) {
-    res.send(generateFakeCategory());
+    res.send(createResponse(generateFakeCategory(), StatusCodes.OK));
   },
   async getCoursesById(req, res) {
     const data = {
       ...generateFakeCategory(),
-      courses: generateFakeCourses(),
+      courses: generateFakeCourses({ length: 100 }),
     };
-    res.send(data);
+    res.send(createResponse(data, StatusCodes.OK));
   },
 };
 

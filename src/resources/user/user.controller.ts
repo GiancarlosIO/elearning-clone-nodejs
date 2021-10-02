@@ -7,6 +7,7 @@ import { classToPlain } from 'class-transformer';
 
 import { BaseError } from '@utils/errors';
 import { jwtTokenExpiration } from '@constants';
+import { createResponse } from '@utils/response';
 import { User } from './user.entity';
 import userService from './user.service';
 import { TUserCredentials } from './user.types';
@@ -18,16 +19,21 @@ const userController: TUserController = {
     const { user }: Context = Context.get(req);
     const currentUser = await userService.getCurrentUser(user.id);
 
-    res.status(statusCode.OK).send(currentUser);
+    res.status(statusCode.OK).send(createResponse(currentUser, statusCode.OK));
   },
   async createUser(req: Request<{}, {}, TUserCredentials>, res, next) {
     try {
       const { user, token } = await userService.createUser(req.body);
 
-      res.status(statusCode.OK).send({
-        user,
-        token,
-      });
+      res.status(statusCode.OK).send(
+        createResponse(
+          {
+            user,
+            token,
+          },
+          statusCode.OK
+        )
+      );
     } catch (err) {
       next(
         new BaseError({
