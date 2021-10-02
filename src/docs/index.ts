@@ -6,6 +6,7 @@ import tags from './tags';
 import courses from './courses';
 import auth from './auth';
 import banners from './banners';
+import categories from './categories';
 
 export default {
   ...basicInfo,
@@ -15,4 +16,5 @@ export default {
   ...courses,
   ...auth,
   ...banners,
+  ...categories,
 };

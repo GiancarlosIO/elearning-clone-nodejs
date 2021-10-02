@@ -1,4 +1,10 @@
-import { CourseModel, id, userModel, bannerModel } from './models';
+import {
+  CourseModel,
+  id,
+  userModel,
+  bannerModel,
+  categoryModel,
+} from './models';
 
 const components = {
   components: {
@@ -14,6 +20,11 @@ const components = {
       Banners: {
         type: 'array',
         items: bannerModel,
+      },
+      Category: categoryModel,
+      Categories: {
+        type: 'array',
+        items: categoryModel,
       },
     },
     securitySchemes: {

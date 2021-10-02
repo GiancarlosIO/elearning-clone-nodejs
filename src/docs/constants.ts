@@ -1,3 +1,4 @@
-export const coursesTag = 'Courses operations';
-export const bannersTag = 'Banners operations';
-export const authTag = 'Authentication operations';
+export const coursesTag = 'Courses endpoints';
+export const bannersTag = 'Banners endpoints';
+export const authTag = 'Authentication endpoints';
+export const categoryTag = 'Category endpoints';
