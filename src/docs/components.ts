@@ -1,4 +1,4 @@
-import { CourseModel, id, userModel } from './models';
+import { CourseModel, id, userModel, bannerModel } from './models';
 
 const components = {
   components: {
@@ -10,6 +10,11 @@ const components = {
         items: CourseModel,
       },
       User: userModel,
+      Banner: bannerModel,
+      Banners: {
+        type: 'array',
+        items: bannerModel,
+      },
     },
     securitySchemes: {
       ApiKeyAuth: {

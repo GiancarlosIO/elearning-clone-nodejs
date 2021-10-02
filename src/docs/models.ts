@@ -98,3 +98,18 @@ export const userModel = {
     lastName: createStrintModel('last name of the user'),
   },
 };
+
+export const bannerModel = {
+  type: 'object',
+  properties: {
+    id,
+    isActive: createBoolean('verify if the banner is active or not'),
+    expiresAt: createStrintModel('check when the banner expires'),
+    position: createNumber('order of the banner'),
+    ctaUrl: createStrintModel('url cta of the banner'),
+    ctaLabel: createStrintModel('cta label'),
+    title: createStrintModel('main title of the banner'),
+    subtitle: createStrintModel('sub title of the banner'),
+    backgroundImage: createStrintModel('image url of the banners bg'),
+  },
+};
