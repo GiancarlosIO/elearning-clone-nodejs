@@ -3,6 +3,7 @@ import 'reflect-metadata';
 import express from 'express';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
+import swaggerUI from 'swagger-ui-express';
 
 import { createConnection } from 'typeorm';
 import {
@@ -16,6 +17,7 @@ import {
 } from '@resources';
 
 import { errorLogger, errorResponder } from '@middlewares/errors';
+import swaggerDocument from '@/docs';
 
 dotenv.config();
 
@@ -47,6 +49,12 @@ createConnection({
     app.use('/api/v1/', categoriesRouter);
     app.use('/api/v1/', subCategoriesRouter);
     app.use('/api/v1/', shoppingCartRouter);
+
+    app.use(
+      '/api/v1/docs',
+      swaggerUI.serve,
+      swaggerUI.setup(swaggerDocument, { explorer: true })
+    );
 
     app.use(errorLogger);
     app.use(errorResponder);
