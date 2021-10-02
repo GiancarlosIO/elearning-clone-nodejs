@@ -9,5 +9,15 @@ shoppingCartRouter.get(
   verifyTokenAndAttachUserToRequest,
   shoppingCartController.getAll
 );
+shoppingCartRouter.post(
+  '/shopping-cart/add',
+  verifyTokenAndAttachUserToRequest,
+  shoppingCartController.addItem
+);
+shoppingCartRouter.post(
+  '/shopping-cart/remove',
+  verifyTokenAndAttachUserToRequest,
+  shoppingCartController.removeItem
+);
 
 export default shoppingCartRouter;
