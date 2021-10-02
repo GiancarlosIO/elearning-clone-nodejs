@@ -16,6 +16,7 @@ const getCategoryById = {
         description: 'category id',
       },
     ],
+    operationId: 'getCategoryById',
     responses: {
       '200': {
         description: 'get category by id',

@@ -6,6 +6,7 @@ const getAllCategories = {
     tags: [categoryTag],
     description: 'get all categories',
     parameters: [],
+    operationId: 'getAllCategories',
     responses: {
       '200': {
         description: 'get all categories',

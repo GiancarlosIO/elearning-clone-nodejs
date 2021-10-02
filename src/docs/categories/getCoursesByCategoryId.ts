@@ -16,6 +16,7 @@ const getCoursesByCategoryId = {
         description: 'category id',
       },
     ],
+    operationId: 'getCoursesByCategoryId',
     responses: {
       '200': {
         description: 'get courses by category id',
