@@ -7,7 +7,15 @@ const getItems = {
     tags: [shoppingCartTag],
     description: 'Get all shopping cart items',
     operationId: 'getShoppingCartItems',
-    parameters: [],
+    parameters: [
+      {
+        name: 'x-access-token',
+        in: 'header',
+        required: true,
+        schema: { type: 'string' },
+        description: 'jwt token',
+      },
+    ],
     responses: {
       '200': {
         description: 'get all shopping cart items',
