@@ -1,8 +1,9 @@
 import { createNumber, createResponseModel } from '../models';
+import { coursesTag } from '../constants';
 
 const getCourse = {
   get: {
-    tags: ['Courses operations'],
+    tags: [coursesTag],
     description: 'Get a single course',
     operationId: 'courseGetCourse',
     parameters: [

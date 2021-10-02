@@ -4,9 +4,11 @@ import {
   createNumber,
 } from '../models';
 
+import { authTag } from '../constants';
+
 const createUser = {
   post: {
-    tags: ['Authentication operations'],
+    tags: [authTag],
     description: 'Create an user',
     operationId: 'createUser',
     parameters: [],

@@ -1,7 +1,15 @@
+import { coursesTag, bannersTag, authTag } from './constants';
+
 const tags = {
   tags: [
     {
-      name: 'Courses operations',
+      name: coursesTag,
+    },
+    {
+      name: bannersTag,
+    },
+    {
+      name: authTag,
     },
   ],
 };

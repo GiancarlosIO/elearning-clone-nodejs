@@ -1,8 +1,10 @@
 import { createResponseModel } from '../models';
 
+import { coursesTag } from '../constants';
+
 const getAll = {
   get: {
-    tags: ['Courses operations'],
+    tags: [coursesTag],
     description: 'Get all courses',
     operationId: 'courseGetAll',
     parameters: [],

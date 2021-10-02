@@ -1,8 +1,9 @@
 import { createResponseModel } from '../models';
+import { authTag } from '../constants';
 
 const getAll = {
   get: {
-    tags: ['Authentication operations'],
+    tags: [authTag],
     description: 'Get the current user data',
     operationId: 'getCurrentUser',
     parameters: [
