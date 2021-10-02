@@ -54,10 +54,6 @@ const courseBaseModel = {
       'http://www.images.com/course/1'
     ),
     title: createStrintModel('Course title', 'Cursos de photoshop'),
-    subTitle: createStrintModel('subtitle of the current course'),
-    trailer: createStrintModel('trailer of the course'),
-    description: createStrintModel('description of the current course'),
-    duration: createNumber('duration of the course in miliseconds'),
     prices: {
       type: 'object',
       properties: {
@@ -74,6 +70,10 @@ export const courseModel = {
   ...courseBaseModel,
   properties: {
     ...courseBaseModel.properties,
+    subTitle: createStrintModel('subtitle of the current course'),
+    trailer: createStrintModel('trailer of the course'),
+    description: createStrintModel('description of the current course'),
+    duration: createNumber('duration of the course in miliseconds'),
     categories: {
       type: 'array',
       items: categoryModel,

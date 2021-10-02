@@ -75,18 +75,12 @@ export const generateFakeCategory = (options = { coursesLength: 200 }) => ({
 // Sections      []CourseSection `json:"sections"`
 // 	Categories    []*Category     `json:"categories" gorm:"many2many:course_categories"`
 // 	SubCategories []*SubCategory  `json:"subCategories" gorm:"many2many:course_sub_categories"
-export const generateFakeCourse = (
-  excludeCategoriesAndSubCategories: boolean = false
-) => {
+export const generateFakeCourse = (minimalist: boolean = false) => {
   const course = {
     id: faker.datatype.uuid(),
     isActive: faker.datatype.boolean(),
     coverImage: faker.image.imageUrl(480, 480),
     title: faker.name.title(),
-    subTitle: faker.lorem.paragraph(),
-    trailer: 'https://www.youtube.com/watch?v=gvkqT_Uoahw',
-    description: faker.lorem.paragraphs(10),
-    duration: faker.datatype.number(9999),
     prices: {
       price: faker.finance.amount(9, 60),
       realPrice: faker.finance.amount(100, 200),
@@ -95,9 +89,13 @@ export const generateFakeCourse = (
     },
   };
 
-  if (!excludeCategoriesAndSubCategories) {
+  if (!minimalist) {
     return {
       ...course,
+      subTitle: faker.lorem.paragraph(),
+      trailer: 'https://www.youtube.com/watch?v=gvkqT_Uoahw',
+      description: faker.lorem.paragraphs(10),
+      duration: faker.datatype.number(9999),
       categories: Array.from({ length: 2 }).map(generateFakeCategory),
       subCategories: Array.from({ length: 2 }).map(generateFakeSubCategory),
     };
@@ -106,13 +104,13 @@ export const generateFakeCourse = (
 };
 
 export const generateFakeCourses = (
-  options: { length?: number; excludeCategoriesAndSubCategories?: boolean } = {
+  options: { length?: number; minimalist?: boolean } = {
     length: 200,
-    excludeCategoriesAndSubCategories: false,
+    minimalist: false,
   }
 ) =>
   Array.from({ length: options.length }).map(() =>
-    generateFakeCourse(options.excludeCategoriesAndSubCategories)
+    generateFakeCourse(options.minimalist)
   );
 
 // ========================================================================
@@ -130,6 +128,6 @@ export const generateShoppingCartFake = () => ({
   },
   detail: generateFakeCourses({
     length: 10,
-    excludeCategoriesAndSubCategories: true,
+    minimalist: true,
   }),
 });
