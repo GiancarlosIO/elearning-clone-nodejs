@@ -6,5 +6,5 @@ export const errorLogger: ErrorRequestHandler = (err, req, res, next) => {
 };
 export const errorResponder: ErrorRequestHandler = (err, req, res, next) => {
   res.header('Content-Type', 'application/json');
-  res.status(err.statusCode).send(JSON.stringify(err, null, 4));
+  res.status(err.status).send(JSON.stringify(err, null, 4));
 };
