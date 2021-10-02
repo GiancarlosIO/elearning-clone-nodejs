@@ -2,8 +2,8 @@ name: deploy-prod
 
 on:
   push:
-    branches:
-      - master
+    branches-ignore:
+      - '**'
 
 jobs:
   build:
