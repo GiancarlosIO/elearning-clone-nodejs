@@ -67,14 +67,6 @@ const courseBaseModel = {
         currencySymbol: createStrintModel('currency symbol'),
       },
     },
-    categories: {
-      type: 'array',
-      items: categoryModel,
-    },
-    subCategories: {
-      type: 'array',
-      items: subCategoryModel,
-    },
   },
 };
 
