@@ -38,7 +38,11 @@ const connectionOptions = isProduction
 
 createConnection({
   ...connectionOptions,
-  ssl: isProduction,
+  ssl: isProduction
+    ? {
+        rejectUnauthorized: false,
+      }
+    : false,
   type: 'postgres',
   synchronize: true,
   logging: true,
