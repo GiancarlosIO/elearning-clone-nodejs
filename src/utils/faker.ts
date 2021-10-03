@@ -98,7 +98,6 @@ export const generateFakeCategory = (options = { coursesLength: 200 }) => ({
   isActive: faker.datatype.boolean(),
   // subCategories: Array.from({ length: 10 }).map(generateFakeSubCategory),
 });
-
 // ========================================================================
 
 // IsActive         bool   `json:"isActive"`
