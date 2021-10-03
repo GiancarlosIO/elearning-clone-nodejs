@@ -37,6 +37,8 @@ const connectionOptions =
         database: process.env.POSTGRES_DB,
       };
 
+console.log({ connectionOptions });
+
 createConnection({
   ...connectionOptions,
   type: 'postgres',
