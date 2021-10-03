@@ -1,5 +1,43 @@
 import faker from 'faker';
 
+type TFakeObject = {
+  [key: string | number]:
+    | string
+    | number
+    | string[]
+    | boolean
+    | number[]
+    | TFakeObject[];
+};
+type TFakeField =
+  | string
+  | number
+  | string[]
+  | number[]
+  | boolean
+  | TFakeObject
+  | TFakeObject[];
+
+type TResourceFake = {
+  [key: string | number]:
+    | TFakeField
+    | {
+        [key: string | number]:
+          | TFakeField
+          | {
+              [key: string | number]:
+                | TFakeField
+                | {
+                    [key: string | number]:
+                      | TFakeField
+                      | {
+                          [key: string | number]: TFakeField;
+                        };
+                  };
+            };
+      };
+};
+
 // ========================================================================
 
 // IsActive bool `json:"isActive"`
@@ -75,8 +113,11 @@ export const generateFakeCategory = (options = { coursesLength: 200 }) => ({
 // Sections      []CourseSection `json:"sections"`
 // 	Categories    []*Category     `json:"categories" gorm:"many2many:course_categories"`
 // 	SubCategories []*SubCategory  `json:"subCategories" gorm:"many2many:course_sub_categories"
-export const generateFakeCourse = (minimalist: boolean = false) => {
-  const course = {
+export const generateFakeCourse = (
+  minimalist: boolean = false,
+  includeAllFields: boolean = false
+) => {
+  let course: TResourceFake = {
     id: faker.datatype.uuid(),
     isActive: faker.datatype.boolean(),
     coverImage: faker.image.imageUrl(480, 480),
@@ -87,10 +128,23 @@ export const generateFakeCourse = (minimalist: boolean = false) => {
       discount: 20,
       currencySymbol: faker.finance.currencySymbol(),
     },
+    score: {
+      average: faker.datatype.float({
+        max: 5,
+        precision: 1,
+      }),
+    },
+    professor: {
+      id: faker.datatype.number(),
+      fullName: `${faker.name.firstName()} ${faker.name.lastName()}`,
+      profileUrl: faker.internet.url(),
+      profilePictureUrl: faker.image.imageUrl(),
+      username: faker.internet.userName(),
+    },
   };
 
   if (!minimalist) {
-    return {
+    course = {
       ...course,
       subTitle: faker.lorem.paragraph(),
       trailer: 'https://www.youtube.com/watch?v=gvkqT_Uoahw',
@@ -100,6 +154,69 @@ export const generateFakeCourse = (minimalist: boolean = false) => {
       subCategories: Array.from({ length: 2 }).map(generateFakeSubCategory),
     };
   }
+
+  if (includeAllFields) {
+    course = {
+      ...course,
+      modules: Array.from({ length: 10 }).map(() => ({
+        id: faker.datatype.uuid(),
+        order: faker.datatype.number(10),
+        title: faker.name.title(),
+        duration: faker.datatype.number({
+          min: 2500000,
+          max: 4500000,
+        }),
+        lessons: Array.from({ length: 10 }).map(() => ({
+          id: faker.datatype.uuid(),
+          order: faker.datatype.number(10),
+          title: faker.name.title(),
+          duration: faker.datatype.number({
+            min: 2500000,
+            max: 4500000,
+          }),
+        })),
+      })),
+      level: {
+        name: faker.helpers.randomize([
+          'Introductorio',
+          'Intermedio',
+          'Avanzado',
+        ]),
+        id: faker.datatype.uuid(),
+      },
+      enrollments: faker.datatype.number({
+        min: 499,
+        max: 20000,
+      }),
+      score: {
+        total: faker.datatype.number(500),
+        average: faker.datatype.float({
+          max: 5,
+          precision: 1,
+        }),
+        details: {
+          five: faker.datatype.number(400),
+          four: faker.datatype.number(400),
+          three: faker.datatype.number(400),
+          two: faker.datatype.number(400),
+          one: faker.datatype.number(400),
+        },
+      },
+      requirements: Array.from({ length: 6 }).map(() => ({
+        id: faker.datatype.uuid(),
+        position: faker.datatype.number(6),
+        title: faker.name.title(),
+        requirementsDetail: Array.from({
+          length: faker.helpers.randomize([1, 4, 6]),
+        }).map(() => ({
+          id: faker.datatype.uuid(),
+          position: faker.datatype.number(6),
+          content: faker.lorem.paragraphs(2),
+        })),
+      })),
+    };
+  }
+
   return course;
 };
 

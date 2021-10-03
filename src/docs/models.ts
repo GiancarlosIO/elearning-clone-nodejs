@@ -44,6 +44,40 @@ export const subCategoryModel = {
   },
 };
 
+export const paginationModel = {
+  type: 'object',
+  nullable: true,
+  description: 'this field will exists if you send page and limit query params',
+  properties: {
+    totalPages: { type: 'number' },
+    totalCount: { type: 'number' },
+    currentPage: { type: 'number' },
+  },
+};
+
+export const lessonModel = {
+  type: 'object',
+  properties: {
+    id,
+    order: createNumber('module order'),
+    title: createStrintModel('module title'),
+    duration: createNumber('duration in miliseconds'),
+  },
+};
+export const moduleModel = {
+  type: 'object',
+  properties: {
+    id,
+    order: createNumber('module order'),
+    title: createStrintModel('module title'),
+    duration: createNumber('duration in miliseconds'),
+    lessons: {
+      type: 'array',
+      items: lessonModel,
+    },
+  },
+};
+
 const courseBaseModel = {
   type: 'object',
   properties: {
@@ -61,6 +95,22 @@ const courseBaseModel = {
         realPrice: createNumber('real price of the course'),
         discount: createNumber('percentage of discount'),
         currencySymbol: createStrintModel('currency symbol'),
+      },
+    },
+    professor: {
+      type: 'object',
+      properties: {
+        id,
+        fullName: createStrintModel('professor full name'),
+        profileUrl: createStrintModel('profile absolute url'),
+        profilePictureUrl: createStrintModel('profile image'),
+        username: createStrintModel('username'),
+      },
+    },
+    score: {
+      type: 'object',
+      properties: {
+        average: createNumber('average'),
       },
     },
   },
@@ -81,6 +131,61 @@ export const courseModel = {
     subCategories: {
       type: 'array',
       items: subCategoryModel,
+    },
+  },
+};
+
+export const courseFullModel = {
+  ...courseModel,
+  properties: {
+    ...courseModel.properties,
+    modules: {
+      type: 'array',
+      items: moduleModel,
+    },
+    level: {
+      type: 'object',
+      properties: {
+        name: createStrintModel('name'),
+        id: createNumber('id'),
+      },
+    },
+    enrollments: createNumber('total of enrollments'),
+    score: {
+      type: 'object',
+      properties: {
+        total: createNumber('total'),
+        average: createNumber('average'),
+        details: {
+          type: 'object',
+          properties: {
+            five: createNumber('number persons that give us five stars'),
+            four: createNumber('number persons that give us four stars'),
+            three: createNumber('number persons that give us three stars'),
+            two: createNumber('number persons that give us two stars'),
+            one: createNumber('number persons that give us one stars'),
+          },
+        },
+      },
+    },
+    requirements: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          id,
+          position: createNumber('position'),
+          title: createStrintModel('title'),
+          requirementsDetails: {
+            type: 'object',
+            properties: {
+              id,
+              position: createNumber('position'),
+              content: createStrintModel('content'),
+            },
+          },
+        },
+      },
     },
   },
 };
@@ -107,15 +212,32 @@ export const coursesBySubCategoryIdModel = {
   },
 };
 
-export const createResponseModel = ($ref: string) => ({
-  type: 'object',
-  properties: {
-    status: createNumber('status code of the response'),
-    data: {
-      $ref,
+export const createResponseModel = (
+  $ref: string,
+  includePagination?: boolean
+) => {
+  if (includePagination) {
+    return {
+      type: 'object',
+      properties: {
+        status: createNumber('status code of the response'),
+        data: {
+          $ref,
+        },
+        pagination: paginationModel,
+      },
+    };
+  }
+  return {
+    type: 'object',
+    properties: {
+      status: createNumber('status code of the response'),
+      data: {
+        $ref,
+      },
     },
-  },
-});
+  };
+};
 
 export const userModel = {
   type: 'object',

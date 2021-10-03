@@ -1,4 +1,4 @@
-import { createNumber, createResponseModel } from '../models';
+import { createResponseModel } from '../models';
 import { coursesTag } from '../constants';
 
 const getCourse = {

@@ -1,6 +1,7 @@
 import {
-  courseModel,
   id,
+  courseModel,
+  courseFullModel,
   userModel,
   bannerModel,
   categoryModel,
@@ -14,7 +15,7 @@ const components = {
   components: {
     schemas: {
       id,
-      Course: courseModel,
+      Course: courseFullModel,
       Courses: {
         type: 'array',
         items: courseModel,

@@ -6,6 +6,12 @@ export default {
     '/courses/': {
       ...getAll,
     },
+    '/courses/news/': {
+      ...getAll,
+    },
+    '/courses/recommended-by-community/': {
+      ...getAll,
+    },
     '/courses/{id}': {
       ...getCourse,
     },
