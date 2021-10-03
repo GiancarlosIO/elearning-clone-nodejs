@@ -36,8 +36,6 @@ const connectionOptions = isProduction
       database: process.env.POSTGRES_DB,
     };
 
-console.log({ connectionOptions });
-
 createConnection({
   ...connectionOptions,
   ssl: isProduction,
