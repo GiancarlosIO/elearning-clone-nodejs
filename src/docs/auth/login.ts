@@ -3,10 +3,11 @@ import {
   createStrintModel,
   createNumber,
 } from '../models';
+import { authTag } from '../constants';
 
 const loginUser = {
   post: {
-    tags: ['Authentication operations'],
+    tags: [authTag],
     description: 'Login with user credentials',
     operationId: 'loginUser',
     parameters: [],
