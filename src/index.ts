@@ -23,24 +23,24 @@ dotenv.config();
 
 const PORT = process.env.PORT || 8080;
 const { DATABASE_URL } = process.env;
-
-const connectionOptions =
-  process.env.NODE_ENV === 'production'
-    ? {
-        url: DATABASE_URL,
-      }
-    : {
-        host: process.env.DATABASE_HOST,
-        port: 5432,
-        username: process.env.POSTGRES_USER,
-        password: process.env.POSTGRES_PASSWORD,
-        database: process.env.POSTGRES_DB,
-      };
+const isProduction = process.env.NODE_ENV === 'production';
+const connectionOptions = isProduction
+  ? {
+      url: DATABASE_URL,
+    }
+  : {
+      host: process.env.DATABASE_HOST,
+      port: 5432,
+      username: process.env.POSTGRES_USER,
+      password: process.env.POSTGRES_PASSWORD,
+      database: process.env.POSTGRES_DB,
+    };
 
 console.log({ connectionOptions });
 
 createConnection({
   ...connectionOptions,
+  ssl: isProduction,
   type: 'postgres',
   synchronize: true,
   logging: true,
