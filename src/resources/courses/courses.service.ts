@@ -13,7 +13,7 @@ const coursesService = {
     return fakeCoures;
   },
   async getById(courseId: number) {
-    return generateFakeCourse();
+    return generateFakeCourse(false, true);
   },
 };
 export default coursesService;

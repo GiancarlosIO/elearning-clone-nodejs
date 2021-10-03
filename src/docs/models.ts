@@ -44,6 +44,40 @@ export const subCategoryModel = {
   },
 };
 
+export const paginationModel = {
+  type: 'object',
+  nullable: true,
+  description: 'this field will exists if you send page and limit query params',
+  properties: {
+    totalPages: { type: 'number' },
+    totalCount: { type: 'number' },
+    currentPage: { type: 'number' },
+  },
+};
+
+export const lessonModel = {
+  type: 'object',
+  properties: {
+    id,
+    order: createNumber('module order'),
+    title: createStrintModel('module title'),
+    duration: createNumber('duration in miliseconds'),
+  },
+};
+export const moduleModel = {
+  type: 'object',
+  properties: {
+    id,
+    order: createNumber('module order'),
+    title: createStrintModel('module title'),
+    duration: createNumber('duration in miliseconds'),
+    lessons: {
+      type: 'array',
+      items: lessonModel,
+    },
+  },
+};
+
 const courseBaseModel = {
   type: 'object',
   properties: {
@@ -66,17 +100,6 @@ const courseBaseModel = {
   },
 };
 
-export const paginationModel = {
-  type: 'object',
-  nullable: true,
-  description: 'this field will exists if you send page and limit query params',
-  properties: {
-    totalPages: { type: 'number' },
-    totalCount: { type: 'number' },
-    currentPage: { type: 'number' },
-  },
-};
-
 export const courseModel = {
   ...courseBaseModel,
   properties: {
@@ -92,6 +115,17 @@ export const courseModel = {
     subCategories: {
       type: 'array',
       items: subCategoryModel,
+    },
+  },
+};
+
+export const courseFullModel = {
+  ...courseModel,
+  properties: {
+    ...courseModel.properties,
+    modules: {
+      type: 'array',
+      items: moduleModel,
     },
   },
 };
