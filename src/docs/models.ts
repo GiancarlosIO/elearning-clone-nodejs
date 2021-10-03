@@ -66,6 +66,17 @@ const courseBaseModel = {
   },
 };
 
+export const paginationModel = {
+  type: 'object',
+  nullable: true,
+  description: 'this field will exists if you send page and limit query params',
+  properties: {
+    totalPages: { type: 'number' },
+    totalCount: { type: 'number' },
+    currentPage: { type: 'number' },
+  },
+};
+
 export const courseModel = {
   ...courseBaseModel,
   properties: {
@@ -107,15 +118,32 @@ export const coursesBySubCategoryIdModel = {
   },
 };
 
-export const createResponseModel = ($ref: string) => ({
-  type: 'object',
-  properties: {
-    status: createNumber('status code of the response'),
-    data: {
-      $ref,
+export const createResponseModel = (
+  $ref: string,
+  includePagination?: boolean
+) => {
+  if (includePagination) {
+    return {
+      type: 'object',
+      properties: {
+        status: createNumber('status code of the response'),
+        data: {
+          $ref,
+        },
+        pagination: paginationModel,
+      },
+    };
+  }
+  return {
+    type: 'object',
+    properties: {
+      status: createNumber('status code of the response'),
+      data: {
+        $ref,
+      },
     },
-  },
-});
+  };
+};
 
 export const userModel = {
   type: 'object',
