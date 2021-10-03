@@ -1,7 +1,7 @@
 const server = {
   servers: [
     {
-      url: 'https://elearning-clone-nodejs.herokuapp.com/',
+      url: 'https://elearning-clone-nodejs.herokuapp.com/api/v1',
       description: 'prod server',
     },
     {
