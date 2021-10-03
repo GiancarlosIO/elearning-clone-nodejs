@@ -97,6 +97,22 @@ const courseBaseModel = {
         currencySymbol: createStrintModel('currency symbol'),
       },
     },
+    professor: {
+      type: 'object',
+      properties: {
+        id,
+        fullName: createStrintModel('professor full name'),
+        profileUrl: createStrintModel('profile absolute url'),
+        profilePictureUrl: createStrintModel('profile image'),
+        username: createStrintModel('username'),
+      },
+    },
+    score: {
+      type: 'object',
+      properties: {
+        average: createNumber('average'),
+      },
+    },
   },
 };
 
@@ -126,6 +142,50 @@ export const courseFullModel = {
     modules: {
       type: 'array',
       items: moduleModel,
+    },
+    level: {
+      type: 'object',
+      properties: {
+        name: createStrintModel('name'),
+        id: createNumber('id'),
+      },
+    },
+    enrollments: createNumber('total of enrollments'),
+    score: {
+      type: 'object',
+      properties: {
+        total: createNumber('total'),
+        average: createNumber('average'),
+        details: {
+          type: 'object',
+          properties: {
+            five: createNumber('number persons that give us five stars'),
+            four: createNumber('number persons that give us four stars'),
+            three: createNumber('number persons that give us three stars'),
+            two: createNumber('number persons that give us two stars'),
+            one: createNumber('number persons that give us one stars'),
+          },
+        },
+      },
+    },
+    requirements: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          id,
+          position: createNumber('position'),
+          title: createStrintModel('title'),
+          requirementsDetails: {
+            type: 'object',
+            properties: {
+              id,
+              position: createNumber('position'),
+              content: createStrintModel('content'),
+            },
+          },
+        },
+      },
     },
   },
 };

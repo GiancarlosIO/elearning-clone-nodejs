@@ -202,12 +202,14 @@ export const generateFakeCourse = (
           one: faker.datatype.number(400),
         },
       },
-      requeriments: Array.from({ length: 6 }).map(() => ({
+      requirements: Array.from({ length: 6 }).map(() => ({
+        id: faker.datatype.uuid(),
         position: faker.datatype.number(6),
         title: faker.name.title(),
-        requerimentsDetail: Array.from({
+        requirementsDetail: Array.from({
           length: faker.helpers.randomize([1, 4, 6]),
         }).map(() => ({
+          id: faker.datatype.uuid(),
           position: faker.datatype.number(6),
           content: faker.lorem.paragraphs(2),
         })),
